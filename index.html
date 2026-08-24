@@ -65,6 +65,27 @@
             list-style: none;
             padding: 0;
             margin-top: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding-right: .75rem;
+            scrollbar-width: thin;
+            scrollbar-color: #777 #202020;
+        }
+        .news-list::-webkit-scrollbar {
+            width: 10px;
+        }
+        .news-list::-webkit-scrollbar-track {
+            background: #202020;
+            border-radius: 8px;
+        }
+        .news-list::-webkit-scrollbar-thumb {
+            background: #777;
+            border: 2px solid #202020;
+            border-radius: 8px;
+        }
+        .news-list::-webkit-scrollbar-thumb:hover {
+            background: #999;
         }
         .news-list li {
             padding: .7rem 0;
