@@ -57,7 +57,7 @@ body {
 .profile-image {
     width: 220px;
     height: 220px;
-    border-radius: 50%;
+    border-radius: 0;
     object-fit: cover;
     margin-bottom: 1.5rem;
     transition: var(--transition);
