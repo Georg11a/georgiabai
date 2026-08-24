@@ -28,6 +28,15 @@
             font-size: .95rem;
             color: var(--text-primary);
             font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+        }
+        .topnav-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
         }
         .topnav-links {
             display: flex;
@@ -225,7 +234,10 @@
 
     <!-- Top Navigation -->
     <nav class="topnav">
-        <span class="topnav-name">Yixin &quot;Georgia&quot; Bai</span>
+        <span class="topnav-name">
+            <img src="images/profile/avatar-icon.png" alt="" class="topnav-icon" aria-hidden="true">
+            Yixin &quot;Georgia&quot; Bai
+        </span>
         <div class="topnav-links">
             <a href="#about">About</a>
             <a href="#news">News</a>
@@ -254,12 +266,14 @@
                     <a href="https://www.virginia.edu/" target="_blank">University of Virginia</a>
                 </div>
 
-                <p class="sidebar-email">byxin @ virginia · edu</p>
-
                 <div class="social-links">
                     <a href="assets/resume.pdf" title="CV" target="_blank">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                         CV
+                    </a>
+                    <a href="mailto:byxin@virginia.edu" title="Email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
+                        Email
                     </a>
                     <a href="https://scholar.google.com/citations?user=hxWbe9gAAAAJ&amp;hl=en" title="Google Scholar" target="_blank">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
@@ -309,22 +323,34 @@
                     <ul class="news-list">
                         <li>
                             <span class="news-date">2026.08</span>
-                            <span>Our paper <em>Less Is More Reflective</em> was accepted to <strong>IEEE VIS 2026</strong>.</span>
+                            <span>Joined the <a href="https://datascience.virginia.edu/" target="_blank">School of Data Science</a> at the University of Virginia.</span>
                         </li>
                         <li>
                             <span class="news-date">2026.07</span>
+                            <span>Our paper <em>Less Is More Reflective</em> was accepted to <strong>IEEE VIS 2026</strong>.</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026.06</span>
                             <span><em>Made to Feel</em> was accepted as an <strong>IEEE VIS 2026 Short Paper</strong>.</span>
                         </li>
                         <li>
-                            <span class="news-date">2025.06</span>
+                            <span class="news-date">2026.05</span>
+                            <span>Presented our work on <em>affective visualization design</em> at the 43rd Annual HCIL Symposium.</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026.04</span>
+                            <span>Attended <strong>CHI 2026</strong> in Barcelona.</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2025.09</span>
+                            <span>Submitted our systematic review of Human–AI Decision-Making to <strong>CHI 2026</strong>.</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2025.05</span>
                             <span>Presented <em>ISee</em> at the 42nd Annual HCIL Symposium.</span>
                         </li>
                         <li>
-                            <span class="news-date">2025.01</span>
-                            <span>Started working on a large-scale systematic review of Human–AI Decision-Making.</span>
-                        </li>
-                        <li>
-                            <span class="news-date">2024.08</span>
+                            <span class="news-date">2024.10</span>
                             <span>Joined the <a href="https://fig-x.github.io/" target="_blank">FIGX Lab</a> at UMD, advised by <a href="https://www.fmyang.com/" target="_blank">Dr. Fumeng Yang</a>.</span>
                         </li>
                     </ul>
@@ -410,9 +436,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             const text = 'Yixin "Georgia" Bai';
             const typingElement = document.getElementById('typingText');
-            const cursor = document.querySelector('.typing-cursor');
 
             if (!typingElement) return;
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                typingElement.textContent = text;
+                return;
+            }
+
             typingElement.textContent = '';
 
             let index = 0;
@@ -420,14 +451,22 @@
                 if (index < text.length) {
                     typingElement.textContent += text.charAt(index);
                     index++;
-                    setTimeout(type, 100);
+                    setTimeout(type, 90);
                 } else {
-                    setTimeout(() => {
-                        if (cursor) cursor.style.display = 'none';
-                    }, 500);
+                    setTimeout(erase, 2400);
                 }
             }
-            type();
+
+            function erase() {
+                if (index > 0) {
+                    typingElement.textContent = text.slice(0, --index);
+                    setTimeout(erase, 45);
+                } else {
+                    setTimeout(type, 600);
+                }
+            }
+
+            setTimeout(type, 350);
         });
 
         // Active nav on scroll
